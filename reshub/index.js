@@ -22,7 +22,7 @@ app.get('/', (req, res) => res.send("Hello Word expressJS and Nodemon"));
 // App apiRoutes 
 app.use("/api", apiRouter);
 
-// Config bodyparser
+// Config bodyParser
 app.use(bodyParser.urlencoded({
     extended : true
 }));
