@@ -5,7 +5,7 @@ Contact  = require("./contactModel.js")
 
 // Handle index actions
 exports.index = function(req, res){
-    Contact.get("/", function(req, res){
+    Contact.get(function(err, contact){
         if(err){
             res.json({
                 status : "Error",
@@ -15,7 +15,7 @@ exports.index = function(req, res){
         res.json({
             status : "Success",
             message : "Contact retrived successfully",
-            data : Contact
+            data : contact
         });
     });
 }
@@ -42,13 +42,48 @@ exports.new = function(req, res){
 
 // handle View info
 exports.view = function(req, res){
-    Contact.findById(req.params.contact.contact_id, function(err, contact)
-    {
+    Contact.findById(req.params.contact_id, function(err, contact){
+        if(err)
+        res.send(err);
+        res.json({
+            message : "Contact details Loading...",
+            data : contact,
+        });
+    });
+};
+
+//Handle Update contact info
+exports.update = function(req, res){
+    Contact.findById(req.params.contact_id, function(err, contact){
         if(err)
         res.send(err)
-        res.json(({
-            message : "Contact details Loading...",
+    contact.name = req.body.name ? req.body.name : contact.name;
+    contact.gender = req.body.gender;
+    contact.email = req.body.email;
+    contact.phone = req.body.phone;
+
+// save contact and check error
+    contact.save(function(err){
+        if(err)
+        res.json(err);
+        res.json({
+            message : "Contact info update!",
             data : contact
-        }))
-    }
+        });
+    });
+    });
+};
+
+// Handle Delete contact
+exports.delete = function(req, res){
+    Contact.remove({
+        _id : req.body.contact_id
+    }, function (err, contact){
+        if(err)
+        res.send(err)
+        res.json({
+            status : "Success!",
+            message : "Contact Deleted!"
+        })
+    })
 }
