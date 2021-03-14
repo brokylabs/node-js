@@ -24,9 +24,17 @@ app.use("/api", apiRouter);
 
 // Config bodyParser
 app.use(bodyParser.urlencoded({
-    extended : true
+    extended : true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }));
 app.use(bodyParser.json());
+
+// app.use(function(req, res){
+//     res.setHeader("Content-Type", "text/plain")
+//     res.write("You Posted:\n")
+//     res.end(JSON.stringify(req, res, null, 2))
+// })
 
 // Connect to Databses Mongoose
 mongoose.connect("mongodb://localhost/reshub");
