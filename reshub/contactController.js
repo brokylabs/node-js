@@ -47,7 +47,7 @@ exports.view = function(req, res){
         if(err)
         res.send(err)
         res.json(({
-            message : "Contact details Loadin...",
+            message : "Contact details Loading...",
             data : contact
         }))
     }
