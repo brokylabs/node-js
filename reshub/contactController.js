@@ -35,7 +35,7 @@ exports.new = function(req, res){
 
         res.json({
             message : "New Contact Created!",
-            data : data
+            data : contact
         })
     })
 }

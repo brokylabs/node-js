@@ -10,6 +10,14 @@ let mongoose = require("mongoose");
 // Initialize App
 let app = Express()
 
+// Config bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended : true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}));
+
 // Import Router API
 let apiRouter = require("./api-routes")
 
@@ -22,13 +30,6 @@ app.get('/', (req, res) => res.send("Hello Word expressJS and Nodemon"));
 // App apiRoutes 
 app.use("/api", apiRouter);
 
-// Config bodyParser
-app.use(bodyParser.urlencoded({
-    extended : true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}));
-app.use(bodyParser.json());
 
 // app.use(function(req, res){
 //     res.setHeader("Content-Type", "text/plain")
@@ -37,7 +38,9 @@ app.use(bodyParser.json());
 // })
 
 // Connect to Databses Mongoose
-mongoose.connect("mongodb://localhost/reshub");
+mongoose.connect("mongodb://localhost/reshub"
+, {useNewUrlParser: true, useUnifiedTopology: true}
+);
 
 let db = mongoose.connection;
 
