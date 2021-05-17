@@ -52,7 +52,7 @@ exports.view = function(req, res){
     });
 };
 
-//Handle Update contact info
+//Handle Update Contact Info
 exports.update = function(req, res){
     Contact.findById(req.params.contact_id, function(err, contact){
         if(err)
