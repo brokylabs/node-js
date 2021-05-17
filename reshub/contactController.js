@@ -77,7 +77,7 @@ exports.update = function(req, res){
 // Handle Delete contact
 exports.delete = function(req, res){
     Contact.remove({
-        _id : req.body.contact_id
+        _id : req.params.contact_id
     }, function (err, contact){
         if(err)
         res.send(err)
